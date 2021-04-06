@@ -43,8 +43,20 @@ concat' ((x:xs):ys) = x : concat' (xs:ys)
 --segs [] = []
 
 -- task 11
+gcd_a :: Int -> Int -> Int
+gcd_a a b | b == 0 = a
+		  | otherwise = gcd_a b (mod a b)
+
+gcd_b :: Int -> Int -> Int
+gcd_b a b | b == 0 = a
+		  | b < a = gcd_b b (a - b)
+		  | otherwise = gcd_b a (b - a)
 
 -- task 12
+gcd_e :: Int -> Int -> (Int, Int)
+gcd_e a b | b == 0 = (1, 0)
+		  | otherwise = (f, s - h1 * f)
+	    where (h1, h2) = quotRem a b; (s, f) = gcd_e b h2
 
 -- task 13
 
