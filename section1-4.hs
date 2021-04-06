@@ -1,3 +1,6 @@
+{-# LANGUAGE TypeSynonymInstances #-}
+{-# LANGUAGE FlexibleInstances #-}
+
 -- task 1
 a = ([([(0,\x -> x + 1)], '0')]) :: [([(Int, Int->Int)], Char)]
 b = (\[(x,y)] -> ([y],[x])) :: [(Char, Int)] -> ([Int], [Char])
@@ -30,7 +33,11 @@ replicate' = \n x -> [x | y <- [1..n]]
 -- task 5
 triples = [(x, y, z) | z <- [1..], x <- [1..z], y <- [1..z], x*x + y*y == z*z]
 -- task 6
-friendly :: Int -> Int -> Bool
-friendly = \x y -> (sum([i | i <- [1..x-1], x `mod` i == 0]) == y)
+amicable :: Int -> Int -> Bool
+amicable = \x y -> (sum([i | i <- [1..x-1], x `mod` i == 0]) == y)
 -- task 7
 triangular = [n*(n + 1)/2 | n <- [1..]]
+-- task 8
+type Bfn = Bool -> Bool -> Bool -> Bool 
+-- a) Ring structure
+-- b) instance of Eq, Num, Show
