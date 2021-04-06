@@ -39,6 +39,9 @@ concat' ([]:xs) = concat' xs
 concat' ((x:xs):ys) = x : concat' (xs:ys)
 
 -- task 10
+segs :: [a] -> [[a]]
+segs [] = [[]]
+segs (x:xs) = [x : segs | segs <- segs xs] ++ segs xs
 
 -- task 11
 
@@ -47,5 +50,13 @@ concat' ((x:xs):ys) = x : concat' (xs:ys)
 -- task 13
 
 -- task 14
+dupl :: [a] -> [a]
+dupl [] = []
+dupl (x:xs) = concatMap (replicate 2) (x:xs)
 
+-- task 16
+rmdupl :: Eq a => [a] -> [a]
+rmdupl [] = []
+rmdupl (x:xs)	| elem x xs = rmdupl xs
+				| otherwise = x : rmdupl xs
 -- task 21
