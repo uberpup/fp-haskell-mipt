@@ -39,9 +39,8 @@ concat' ([]:xs) = concat' xs
 concat' ((x:xs):ys) = x : concat' (xs:ys)
 
 -- task 10
-segs :: [a] -> [[a]]
-segs [] = [[]]
-segs (x:xs) = [x : segs | segs <- segs xs] ++ segs xs
+--segs :: [a] -> [[a]]
+--segs [] = []
 
 -- task 11
 
@@ -59,4 +58,10 @@ rmdupl :: Eq a => [a] -> [a]
 rmdupl [] = []
 rmdupl (x:xs)	| elem x xs = rmdupl xs
 				| otherwise = x : rmdupl xs
+
+-- task 20
+subseqs :: [a] -> [[a]]
+subseqs [] = [[]]
+subseqs (x:xs) = [x : s | s <- subseqs xs] ++ subseqs xs
+
 -- task 21
