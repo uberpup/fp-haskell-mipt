@@ -38,6 +38,24 @@ amicable = \x y -> (sum([i | i <- [1..x-1], x `mod` i == 0]) == y)
 -- task 7
 triangular = [n*(n + 1)/2 | n <- [1..]]
 -- task 8
-type Bfn = Bool -> Bool -> Bool -> Bool 
+type Btr = (Bool, Bool, Bool)
+type Bfn = Btr -> Bool 
 -- a) Ring structure
 -- b) instance of Eq, Num, Show
+add' :: Bfn -> Bfn -> Bfn
+add' f g x = f x or g x 
+
+mlt' :: Bfn -> Bfn -> Bfn
+mlt' f g x = f x and g x
+
+--eq' :: Bfn -> Bfn -> Bool
+--eq' f g
+
+null' :: Bfn
+null' _ = False
+
+id' :: Bfn
+id' _ = True
+
+inv' :: Bfn -> Bfn
+inv f x = not . f x

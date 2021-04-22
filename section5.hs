@@ -76,4 +76,4 @@ subseqs :: [a] -> [[a]]
 subseqs [] = [[]]
 subseqs (x:xs) = [x : s | s <- subseqs xs] ++ subseqs xs
 
--- task 21
+-- task 22
