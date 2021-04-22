@@ -54,8 +54,19 @@ zapp (f:fs) (x:xs) = (f $ x) : zapp (fs) (xs)
 
 -- task 34
 -- [x,x,y,z,z,z] -> [(x, 2), (y, 1), (z, 3)]
-compressList :: Eq a => [a] -> [a]
-compressList x = foldr (\x xs -> if x == (head xs) then xs else x:xs) [last x] x
+-- Failed to implement using foldr, so ...
+compress :: Eq a => [a] -> [(a, Int)]
+compress xs = compressList $ transformList(xs)
 
---decompressList :: [(a, Int)] -> [a]
---decompressList =
+compressList :: Eq a => [(a, Int)] -> [(a, Int)]
+compressList [] = []
+compressList (x:xs) | null xs = [x]
+					| fst x == fst(head (xs)) = compressList((fst x, snd x + snd(head(xs))) : tail xs)   
+					| otherwise = x : compressList xs
+
+transformList :: Eq a => [a] -> [(a, Int)]
+transformList xs = zip(xs) (repeat(1))
+
+decompress :: [(a, Int)] -> [a]
+decompress [] = []
+decompress (x:xs) = [fst x | _ <- [1..snd(x)]] ++ decompress xs
