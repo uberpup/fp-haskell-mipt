@@ -39,8 +39,9 @@ concat' ([]:xs) = concat' xs
 concat' ((x:xs):ys) = x : concat' (xs:ys)
 
 -- task 10
---segs :: [a] -> [[a]]
---segs [] = []
+segs :: [a] -> [[a]]
+segs [] = []
+segs (x:xs) = [ take k (x:xs) | k <- [1..length (x:xs)]] ++ segs xs
 
 -- task 11
 gcd_a :: Int -> Int -> Int
@@ -57,8 +58,6 @@ gcd_e :: Int -> Int -> (Int, Int)
 gcd_e a b | b == 0 = (1, 0)
 		  | otherwise = (f, s - h1 * f)
 	    where (h1, h2) = quotRem a b; (s, f) = gcd_e b h2
-
--- task 13
 
 -- task 14
 dupl :: [a] -> [a]
