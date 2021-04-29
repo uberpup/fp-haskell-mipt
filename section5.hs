@@ -35,6 +35,7 @@ listcon' (x:xs) [] = (x:xs)
 listcon' (x:xs) ys = x : (listcon' xs ys)
 
 concat' :: [[a]] -> [a]
+concat' [] = []
 concat' ([]:xs) = concat' xs
 concat' ((x:xs):ys) = x : concat' (xs:ys)
 
