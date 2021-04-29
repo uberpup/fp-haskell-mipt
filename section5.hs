@@ -23,7 +23,7 @@ null' (x:xs) = False
 elem' :: Eq a => a -> [a] -> Bool
 elem' x [] = False
 elem' x (y:ys) | x == y = True
-			   | otherwise = elem' x (ys) 
+               | otherwise = elem' x (ys) 
 
 nth' :: Int -> [a] -> a	 -- n less than [] length
 nth' 0 (x:xs) = x
@@ -46,18 +46,18 @@ segs (x:xs) = [ take k (x:xs) | k <- [1..length (x:xs)]] ++ segs xs
 -- task 11
 gcd_a :: Int -> Int -> Int
 gcd_a a b | b == 0 = a
-		  | otherwise = gcd_a b (mod a b)
+          | otherwise = gcd_a b (mod a b)
 
 gcd_b :: Int -> Int -> Int
 gcd_b a b | b == 0 = a
-		  | b < a = gcd_b b (a - b)
-		  | otherwise = gcd_b a (b - a)
+          | b < a = gcd_b b (a - b)
+          | otherwise = gcd_b a (b - a)
 
 -- task 12
 gcd_e :: Int -> Int -> (Int, Int)
 gcd_e a b | b == 0 = (1, 0)
-		  | otherwise = (f, s - h1 * f)
-	    where (h1, h2) = quotRem a b; (s, f) = gcd_e b h2
+          | otherwise = (f, s - h1 * f)
+          where (h1, h2) = quotRem a b; (s, f) = gcd_e b h2
 
 -- task 14
 dupl :: [a] -> [a]
@@ -68,7 +68,7 @@ dupl (x:xs) = concatMap (replicate 2) (x:xs)
 rmdupl :: Eq a => [a] -> [a]
 rmdupl [] = []
 rmdupl (x:xs)	| elem x xs = rmdupl xs
-				| otherwise = x : rmdupl xs
+                | otherwise = x : rmdupl xs
 
 -- task 20
 subseqs :: [a] -> [[a]]
