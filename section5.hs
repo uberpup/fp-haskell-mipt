@@ -55,10 +55,14 @@ gcd_b a b | b == 0 = a
           | otherwise = gcd_b a (b - a)
 
 -- task 12
-gcd_e :: Int -> Int -> (Int, Int)
+gcd_e :: Int -> Int -> (Int, Int)	-- non-negative only
 gcd_e a b | b == 0 = (1, 0)
           | otherwise = (f, s - h1 * f)
           where (h1, h2) = quotRem a b; (s, f) = gcd_e b h2
+
+gcd_e_neg :: Int -> Int -> (Int, Int)
+gcd_e_neg a b | a * b < 0 = (negate $ fst $ gcd_e a b, negate $ snd $ gcd_e a b)
+              | otherwise = gcd_e a b
 
 -- task 14
 dupl :: [a] -> [a]
