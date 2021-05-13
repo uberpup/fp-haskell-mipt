@@ -62,4 +62,37 @@ isBlncd :: Tree a -> Bool
 isBlncd Nil = True
 isBlncd (Node l _ r) = isBlncd l && isBlncd r && abs(height l - height r) <= 1
 
---
+left :: Tree a -> Tree a
+left Nil = Nil
+left (Node l x r) = l
+
+right :: Tree a -> Tree a
+right Nil = Nil
+right (Node l x r) = r
+
+value :: (Ord a, Num a) => Tree a -> a
+value Nil = 0
+value (Node l x r) = x
+
+insAVL :: (Ord a, Num a) => a -> Tree a -> Tree a -- Function for tak 38
+insAVL a Nil = Node Nil a Nil
+insAVL a (Node l x r) | x < a = balanceAVL (Node l x (insAVL a r))
+                      | otherwise = balanceAVL (Node (insAVL a l) x r)
+
+balanceAVL :: (Ord a, Num a) => Tree a -> Tree a
+balanceAVL Nil = Nil
+balanceAVL (Node l x r) | not (isBlncd l) = Node (balanceAVL l) x r
+                        | not (isBlncd r) = Node l x (balanceAVL r)
+                        | (height l) + 1 < (height r) &&
+                          (height (left r)) < (height (right r)) =
+                           Node (Node l x (left r)) (value r) (right r)
+                        | (height r) + 1 < (height l) &&
+                          (height (right l)) < (height (left l)) =
+                           Node (left l) (value l) (Node (right l) x r)
+                        | (height l) + 1 < (height r) &&
+                          (height (left r)) > height (right r) = 
+                           Node (Node l x (left (left r))) (value (left r)) (Node (right (left r)) (value r) (right r))
+                        | (height r) + 1 < (height l) &&
+                          (height (right l)) > (height (left l)) = 
+                           Node (Node (left l) (value l) (left (right l))) (value (right l)) (Node (right (right l)) x r)
+                        | otherwise = Node l x r
