@@ -43,3 +43,16 @@ int_reader = do putStrLn "Input number: "
                 if val == Nothing
                     then return ()
                     else int_reader
+
+-- task 43
+
+str_end :: IO ()
+str_end = str_reader ""
+
+str_reader :: String -> IO ()
+str_reader str = do putStrLn "Input string or 'END' to end this"
+                    input <- getLine
+                    if input == "END"
+                       then putStrLn str
+                       else if input > str then str_reader input
+                       else str_reader str
