@@ -1,3 +1,4 @@
+import Data.Char
 import System.IO
 import Text.Read
 
@@ -56,3 +57,14 @@ str_reader str = do putStrLn "Input string or 'END' to end this"
                        then putStrLn str
                        else if input > str then str_reader input
                        else str_reader str
+
+-- task 44
+
+inputToLower :: IO()
+inputToLower = do eof <- isEOF
+                  if not eof then
+                     do line <- getLine
+                        putStr $ map toLower line
+                        inputToLower
+                  else
+                    return ()

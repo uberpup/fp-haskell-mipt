@@ -26,7 +26,36 @@ takeWhile' p (x:xs) | p x = x : takeWhile' p xs
 dropWhile' :: (a -> Bool) -> [a] -> [a]
 dropWhile' p [] = []
 dropWhile' p (x:xs) | p x = dropWhile' p xs
-					| otherwise = x : xs 
+					| otherwise = x : xs
+
+-- task 25
+foldr1' :: (a -> a -> a) -> [a] -> a
+foldr1' f xs = foldr f (last xs) (init xs)
+
+-- task 26
+lmax' :: Ord a => [a] -> a
+lmax' = foldr1' (\x acc -> if x >= acc then x else acc)
+
+-- task 27
+scanl :: (b -> a -> b) -> b -> [a] -> [b]
+scanl f z xs = foldr go (const []) xs z
+  where
+    go x continue acc = let next = f acc x in next : continue next
+
+-- task 28
+allPrefixes :: [a] -> [[a]]
+allPrefixes (x:xs) = Main.scanl (\acc x -> acc ++ [x]) [x] xs
+
+-- task 29
+rot :: [a] -> [a]
+rot xs = (last xs) : (init xs)
+
+rotts' :: [a] -> [[a]]
+rotts' xs = take (length xs) (iterate rot xs)
+
+rotts'' :: [a] -> [[a]]
+rotts'' xs = init $ Main.scanl (\ys _ -> rot ys) xs xs
+
 -- task 30
 unzip' :: [(a, b)] -> ([a], [b])
 unzip' [] = ([], [])
@@ -46,11 +75,12 @@ curry' f = \x y -> f (x, y)
 uncurry' :: (x -> y -> z) -> ((x, y) -> z)
 uncurry' f = \(x, y) -> f x y
 
+-- task 32
+-- f = curry $ h . (uncurry g)
+
 -- task 33
 zapp :: [a -> b] -> [a] -> [b]
-zapp _ [] = []
-zapp [] _ = []
-zapp (f:fs) (x:xs) = (f $ x) : zapp (fs) (xs)
+zapp = curry ((map (uncurry ($))) . (uncurry zip))
 
 -- task 34
 -- [x,x,y,z,z,z] -> [(x, 2), (y, 1), (z, 3)]
