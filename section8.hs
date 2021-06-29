@@ -64,7 +64,7 @@ inputToLower :: IO()
 inputToLower = do eof <- isEOF
                   if not eof then
                      do line <- getLine
-                        putStr $ map toLower line
+                        putStr $ map (\ch -> if isLower ch then (toUpper ch) else (toLower ch)) line
                         inputToLower
                   else
                     return ()
