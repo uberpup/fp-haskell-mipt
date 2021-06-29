@@ -60,11 +60,11 @@ str_reader str = do putStrLn "Input string or 'END' to end this"
 
 -- task 44
 
-inputToLower :: IO()
-inputToLower = do eof <- isEOF
+swapRegister :: IO()
+swapRegister = do eof <- isEOF
                   if not eof then
                      do line <- getLine
                         putStr $ map (\ch -> if isLower ch then (toUpper ch) else (toLower ch)) line
-                        inputToLower
+                        swapRegister
                   else
                     return ()
