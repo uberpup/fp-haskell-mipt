@@ -27,5 +27,5 @@ str_reader probs iters = do putStrLn "Input 0 or 1"
                             let iters = iters + 1
                             putStrLn ("Prediction was" ++ " " ++ [prediction])
                             let new_probs = renewProbs probs input iters
-                            str_reader probs iters
+                            str_reader probs iters -- should be new_probs, but is looping for some reason
                             return ()
